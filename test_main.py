@@ -1,22 +1,24 @@
-import unittest
-from main import generate_random_data
+import pytest
+from main import generate_random_data, generate_excel_file, estimate_excel_size
 
 
-class TestGenerateExcelFile(unittest.TestCase):
+def test_generated_file_size():
+    rows = 1000
+    columns = 20
+    estimated_size = estimate_excel_size(rows, columns)
 
-    # def test_generate_excel_file(self):
-    #     size_mb = 5  # Test with a desired size of 5 MB
-    #     excel_data = generate_excel_file(size_mb)
-    #
-    #     self.assertIsInstance(excel_data, bytes)
-    #     self.assertGreaterEqual(len(excel_data), size_mb * 1024 * 1024)
+    tolerance = 0.1
+    generated_file = generate_excel_file(rows, columns)
 
-    def test__generate_random_data(self):
-        size_mb = 5
-        random_data = generate_random_data(size_mb)
-        self.assertIsInstance(random_data, str)
-        self.assertGreaterEqual(len(random_data), size_mb * 1024 * 1024)
+    generated_file_data = generated_file.read()
+    generated_file_size_mb = len(generated_file_data) / (1024 * 1024)
+
+    assert abs(generated_file_size_mb - estimated_size) < tolerance
 
 
-if __name__ == '__main__':
-    unittest.main()
+@pytest.mark.parametrize("size_mb", [5])
+def test_generate_random_data(size_mb):
+    random_data = generate_random_data(size_mb)
+
+    assert isinstance(random_data, str)
+    assert len(random_data) >= size_mb * 1024 * 1024
