@@ -9,7 +9,7 @@ This is a simple Streamlit app that generates files with random data and allows 
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/yourusername/file-generator-app.git
+   git clone https://github.com/linomp/streamlit-filegen.git
    cd streamlit-filegen
 
 2. Set up & activate a virtual environment
