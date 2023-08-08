@@ -10,7 +10,8 @@ def generate_random_data(size):
 def main():
     st.title("File Generator App")
 
-    extension = st.selectbox("Select File Extension", ["txt", "word", "excel"])
+    # TODO: support excel and others
+    extension = st.selectbox("Select File Extension", ["txt"])
     size = st.number_input("Enter Desired File Size (MB)", min_value=1, step=1)
 
     if st.button("Generate"):
