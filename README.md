@@ -1,36 +1,18 @@
-﻿# File Generator App
+﻿# File Generator Tool
 
-This is a simple Streamlit app that generates files with random data and allows you to download them. Currently supports .xlsx and .txt files.
+This is a simple tool for generating files of arbitrary size with random data and allows you to download them. Currently supports .xlsx and .txt files.
 
-**Check the live version [here](https://app-filegen-5o5rfikerwjvsiuihdzb8c.streamlit.app/).**
-
-## Local Setup
-
-1. Clone the repository:
-
-   ```sh
-   git clone https://github.com/linomp/streamlit-filegen.git
-   cd streamlit-filegen
-
-2. Set up & activate a virtual environment
-    ```
-    # On macOS and Linux
-    python3 -m venv venv
-    source venv/bin/activate
-    
-    # On Windows
-    python -m venv venv
-    .\venv\Scripts\activate
-    ```
-3. Install the required packages:
-    ```
-    pip install -r requirements.txt
-    ```
-4. Run the tests:
+## Usage
+- Check the deployed Streamlit version [here](https://app-filegen-5o5rfikerwjvsiuihdzb8c.streamlit.app/).
+- Or set it up locally:
    ```
-   pytest
+   git clone https://github.com/linomp/filegen-tool.git
+   cd filegen-tool
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+   streamlit run streamlit_app/main.py
    ```
-5. Run the app:
-    ```
-    streamlit run main.py
-    ```
+## Roadmap
+- [X] Simple streamlit-based app (loads everything in memory, slow AF)
+- [ ] FastAPI-based backend to stream files chunk by chunk instead of loading it all in memory
