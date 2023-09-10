@@ -1,5 +1,6 @@
 import pytest
-from main import generate_random_data, generate_excel_file, estimate_excel_size
+
+from utils.files import generate_random_data, generate_excel_file, estimate_excel_size
 
 
 def test_generated_file_size():
@@ -18,7 +19,7 @@ def test_generated_file_size():
 
 @pytest.mark.parametrize("size_mb", [5])
 def test_generate_random_data(size_mb):
-    random_data = generate_random_data(size_mb)
+    random_data = generate_random_data(size_mb * 1024 * 1024)
 
     assert isinstance(random_data, str)
     assert len(random_data) >= size_mb * 1024 * 1024

@@ -1,43 +1,13 @@
-from io import BytesIO
-from openpyxl import Workbook
-
 import streamlit as st
-import random
-import string
 
-
-def generate_random_data(size: int):
-    return ''.join(random.choice(string.ascii_letters) for _ in range(size * 1024 * 1024))
-
-
-def generate_excel_file(rows: int, columns: int) -> BytesIO:
-    excel_data = BytesIO()
-
-    wb = Workbook()
-    ws = wb.active
-
-    for _ in range(rows):
-        row = [random.randint(1, 100) for _ in range(columns)]
-        ws.append(row)
-
-    wb.save(excel_data)
-    excel_data.seek(0)
-
-    return excel_data
-
-
-def estimate_excel_size(rows: int, columns: int):
-    int_size_bytes = 4
-    estimated_size_bytes = rows * columns * int_size_bytes
-    estimated_size_mb = estimated_size_bytes / (1024 * 1024)
-
-    return estimated_size_mb
+from utils.files import estimate_excel_size, generate_random_data, generate_excel_file
 
 
 def main():
     st.title("File Generator App")
 
     extension = st.selectbox("Select File Extension", ["xlsx", "txt"])
+    size = rows = columns = 0
 
     if extension == "xlsx":
         rows = st.number_input("Enter Desired Number of Rows", min_value=1, step=1)
@@ -52,7 +22,7 @@ def main():
         mime = None
 
         if extension == "txt":
-            data = generate_random_data(size).encode()
+            data = generate_random_data(size * 1024 * 1024).encode()
             mime = "text/plain"
         elif extension == "xlsx":
             data = generate_excel_file(rows, columns).read()

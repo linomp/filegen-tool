@@ -1,6 +1,6 @@
 import os
 
-from main import estimate_excel_size, generate_excel_file
+from utils.files import estimate_excel_size, generate_excel_file
 
 if __name__ == "__main__":
     num_rows = int(input("Enter number of rows: "))
